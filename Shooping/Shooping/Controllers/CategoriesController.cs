@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Shooping.Data;
 using Shooping.Data.Entities;
 
 namespace Shooping.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class CategoriesController : Controller
     {
         private readonly DataContext _context;
@@ -55,7 +57,7 @@ namespace Shooping.Controllers
 
             return View(category);
         }
-       
+
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -124,7 +126,7 @@ namespace Shooping.Controllers
 
             return View(category);
         }
-       
+
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
